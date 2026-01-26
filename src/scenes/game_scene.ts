@@ -16,8 +16,16 @@ export class GameScene extends ex.Scene {
 
         this.add(new ex.Actor({
             pos: new ex.Vector(10, 10), 
-            width: 50,
+            width: 500,
             height: 50,
+            color: new ex.Color(99, 66, 33),
+            collisionType: ex.CollisionType.Fixed,
+        }))
+
+        this.add(new ex.Actor({
+            pos: new ex.Vector(0, 0), 
+            width: 50,
+            height: 500,
             color: new ex.Color(99, 66, 33),
             collisionType: ex.CollisionType.Fixed,
         }))

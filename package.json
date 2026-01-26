@@ -4,11 +4,12 @@
     "vite": "7.3.1"
   },
   "dependencies": {
+    "@excaliburjs/plugin-tiled": "0.32.0",
     "excalibur": "0.32.0"
   },
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview"
- }
+  }
 }
