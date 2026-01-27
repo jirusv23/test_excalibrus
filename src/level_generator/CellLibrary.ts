@@ -75,7 +75,7 @@ export const CellLibrary: Record<string, CellConfiguration> = {
     T_INTERSECTION_BOTTOM: {
         cell_type: CellType.Full, 
         cell_texture: [ {texture_index: 13, chance: 1} ],
-        open_directions: [false, false, true, true] 
+        open_directions: [true, true, false, true] 
     },
     T_INTERSECTION_RIGHT: {
         cell_type: CellType.Full, 

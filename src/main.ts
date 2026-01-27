@@ -15,5 +15,6 @@ const game = new ex.Engine({
   }
 });
 
-res.Images.playerSpriteSheetSource.load()
+res.Images.playerSpriteSheetSource.load();
+res.Images.spaceStationSpriteSheetSource.load();
 game.start('menuScene');

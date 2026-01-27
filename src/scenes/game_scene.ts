@@ -1,5 +1,8 @@
 import * as ex from 'excalibur'
 import { Player } from '../player';
+import { SpaceshipGenerator } from '../level_generator/SpaceshipGenerator';
+import { SpriteSheets } from '../assets';
+import { SPACESHIP_TEMPLATES } from '../level_generator/spaceship_templates';
 
 export class GameScene extends ex.Scene {
     player : ex.Actor;
@@ -21,5 +24,11 @@ export class GameScene extends ex.Scene {
             color: new ex.Color(99, 66, 33),
             collisionType: ex.CollisionType.Fixed,
         }))
+
+        let generator = new SpaceshipGenerator(SPACESHIP_TEMPLATES[0], SpriteSheets.spaceStationSpriteSheet, ex.randomIntInRange(0, 10000));
+        generator.generateUsingRecursiveBacktracking();
+        console.log(generator.tilemap);
+        this.add(generator.tilemap);
+
     }
 }
