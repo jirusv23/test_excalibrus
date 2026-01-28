@@ -73,6 +73,7 @@ export class SpaceshipGenerator {
     /** Generates a level using recursive backtracking */
     public generateUsingRecursiveBacktracking()
     {
+        this.resetTilemap();
         /** Coordinates from which we start generating  */
         const startingCoordinates = this.pickRandomEntrance()
         /** Current point we are currently at */
@@ -303,5 +304,16 @@ export class SpaceshipGenerator {
         { possibleDirection.push(1); }
 
         return possibleDirection;
+    }
+
+    /** Sets the tilemap to empty one */
+    private resetTilemap()
+    {
+        this.tilemap = new ex.TileMap({
+            rows: this.template.layout.length,
+            columns: this.template.layout[0].length,
+            tileWidth: this.spriteSheet.sprites[0].width,
+            tileHeight: this.spriteSheet.sprites[0].height,
+        })
     }
 }

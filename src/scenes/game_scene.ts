@@ -3,9 +3,11 @@ import { Player } from '../player';
 import { SpaceshipGenerator } from '../level_generator/SpaceshipGenerator';
 import { SpriteSheets } from '../assets';
 import { SPACESHIP_TEMPLATES } from '../level_generator/spaceship_templates';
+import { delay } from 'excalibur/build/dist/Util/Util';
 
 export class GameScene extends ex.Scene {
     player : ex.Actor;
+    generator : SpaceshipGenerator
 
     constructor() {
         super()
@@ -25,10 +27,21 @@ export class GameScene extends ex.Scene {
             collisionType: ex.CollisionType.Fixed,
         }))
 
-        let generator = new SpaceshipGenerator(SPACESHIP_TEMPLATES[0], SpriteSheets.spaceStationSpriteSheet, ex.randomIntInRange(0, 10000));
-        generator.generateUsingRecursiveBacktracking();
-        console.log(generator.tilemap);
-        this.add(generator.tilemap);
+        this.generator = new SpaceshipGenerator(SPACESHIP_TEMPLATES[0], SpriteSheets.spaceStationSpriteSheet, 10);
+        this.generator.generateUsingRecursiveBacktracking();
+        this.generator.tilemap.scale = new ex.Vector(4, 4);
+        this.add(this.generator.tilemap);
+    }
 
+    update(engine: ex.Engine, elapsed: number): void {
+        super.update(engine, elapsed);
+
+        if (engine.input.keyboard.wasPressed(ex.Keys.F))
+        {
+            this.remove(this.generator.tilemap);
+            this.generator.generateUsingRecursiveBacktracking();
+            this.generator.tilemap.scale = new ex.Vector(4, 4);
+            this.add(this.generator.tilemap);
+        }
     }
 }
