@@ -4,7 +4,7 @@ import { PlayerAnimations } from './assets';
 
 export class Player extends ex.Actor {
     /** Player's deceleration */
-    private deceleration : number = 1200;
+    private deceleration : number = 1500;
     /** Players acceleration */
     private acceleration : number = 1600;
     /** Players max speed */

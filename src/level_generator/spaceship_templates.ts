@@ -14,12 +14,12 @@ export const SPACESHIP_TEMPLATES: SpaceshipTemplate[] = [
         name: "Small shuttle",
         layout: 
         [
-            [ CellType.Blank,    CellType.Blank,    CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank,    CellType.Blank, ],
+            [ CellType.Full,    CellType.Full,    CellType.Full,    CellType.Full,     CellType.Entrance,CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank,    CellType.Blank, ],
             [ CellType.Blank,    CellType.Blank,    CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank,    CellType.Blank, ],
             [ CellType.Blank,    CellType.Blank,    CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank,    CellType.Blank, ],
             [ CellType.Blank,    CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank, ],
-            [ CellType.Blank,    CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank, ],
-            [ CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank, ],
+            [ CellType.Blank,    CellType.Entrance,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank,    CellType.Blank, ],
+            [ CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Entrance,     CellType.Blank, ],
             [ CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank, ],
             [ CellType.Blank,    CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Blank, ],
             [ CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,     CellType.Full,  ],

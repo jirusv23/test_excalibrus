@@ -21,7 +21,7 @@ export const SpriteSheets = {
     spaceStationSpriteSheet: ex.SpriteSheet.fromImageSource({
         image: Images.spaceStationSpriteSheetSource,
         grid: {
-            rows: 4,
+            rows: 5,
             columns: 4,
             spriteWidth: 16,
             spriteHeight: 16,

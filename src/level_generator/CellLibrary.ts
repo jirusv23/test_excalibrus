@@ -87,4 +87,15 @@ export const CellLibrary: Record<string, CellConfiguration> = {
         cell_texture: [ {texture_index: 15, chance: 1} ],
         open_directions: [true, true, true, false] 
     },
+    /** overlay texture for entrances */
+    ENTRANCE_OVERLAY: {
+        cell_type: CellType.Entrance, 
+        cell_texture: [ {texture_index: 16, chance: 1} ],
+        open_directions: [false, false, false, false] 
+    },
+    CHOOSEN_ENTRANCE_OVERLAY: {
+        cell_type: CellType.Entrance, 
+        cell_texture: [ {texture_index: 17, chance: 1} ],
+        open_directions: [false, false, false, false] 
+    },
 };

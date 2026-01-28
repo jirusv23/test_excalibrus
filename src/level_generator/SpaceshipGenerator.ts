@@ -118,7 +118,6 @@ export class SpaceshipGenerator {
                 currentConnections[chosenDirection] = true;
                 
                 // Move to the next cell
-                const previousCoordinate = {...currentCoordinate};
                 switch (chosenDirection) {
                     case 0: // North
                         currentCoordinate.Y -= 1; 
@@ -161,7 +160,7 @@ export class SpaceshipGenerator {
         }
         
         // Now assign cell configurations based on connections
-        this.assignCellConfigurations(cellConnections);
+        this.assignCellConfigurations(cellConnections, startingCoordinates);
     }
 
     /**
@@ -172,12 +171,17 @@ export class SpaceshipGenerator {
     private coordinatesToKey(coord: Coordinates): string {
         return `${coord.X},${coord.Y}`;
     }
-
+    
     /**
      * Assigns appropriate cell configurations from CellLibrary based on open directions
      * @param cellConnections Map of coordinate keys to their open direction arrays
-     */
-    private assignCellConfigurations(cellConnections: Map<string, boolean[]>): void {
+     * @param startingCoord Optional coordinates which will indicate from which cell was spaceship generated
+    */
+   private assignCellConfigurations(cellConnections: Map<string, boolean[]>, startingCoord: Coordinates | null): void {
+
+        const entranceTextureIndex = this.selectTextureFromLikelihood(CellLibrary.ENTRANCE_OVERLAY.cell_texture)
+        const choosenEntranceTextureIndex = this.selectTextureFromLikelihood(CellLibrary.CHOOSEN_ENTRANCE_OVERLAY.cell_texture)
+
         cellConnections.forEach((openDirections, key) => {
             const [xStr, yStr] = key.split(',');
             const x = parseInt(xStr);
@@ -185,7 +189,10 @@ export class SpaceshipGenerator {
             
             // Find matching cell configuration from library
             const cellConfig = this.findMatchingCellConfig(openDirections);
-            
+
+            // Get the tile
+            const tile = this.tilemap.getTile(x, y);
+
             if (cellConfig) {
                 // Select texture based on likelihood
                 const textureIndex = this.selectTextureFromLikelihood(cellConfig.cell_texture);
@@ -194,10 +201,31 @@ export class SpaceshipGenerator {
                 const spriteX = textureIndex % this.spriteSheet.columns;
                 const spriteY = Math.floor(textureIndex / this.spriteSheet.columns);
                 
-                // Get the tile and set its graphic
-                const tile = this.tilemap.getTile(x, y);
                 if (tile) {
                     tile.addGraphic(this.spriteSheet.getSprite(spriteX, spriteY));
+                }
+            }
+
+            if (this.getCellTypeFromTemplate(x, y) === CellType.Entrance)
+            {
+                // Check if the entrance is the one which was choosen as starting point for spaceship generation
+                if (startingCoord && startingCoord.X == x && startingCoord.Y == y)
+                {
+                    const spriteX = choosenEntranceTextureIndex % this.spriteSheet.columns;
+                    const spriteY = Math.floor(choosenEntranceTextureIndex / this.spriteSheet.columns);
+
+                    if (tile) {
+                        tile.addGraphic(this.spriteSheet.getSprite(spriteX, spriteY));
+                    }
+                }
+                else 
+                {
+                    const spriteX = entranceTextureIndex % this.spriteSheet.columns;
+                    const spriteY = Math.floor(entranceTextureIndex / this.spriteSheet.columns);
+
+                    if (tile) {
+                        tile.addGraphic(this.spriteSheet.getSprite(spriteX, spriteY));
+                    }
                 }
             }
         });
@@ -315,5 +343,16 @@ export class SpaceshipGenerator {
             tileWidth: this.spriteSheet.sprites[0].width,
             tileHeight: this.spriteSheet.sprites[0].height,
         })
+    }
+
+    /**
+     * Returns a `CellType` located somewhere in this.template.layout
+     * @param x X coordinates of template
+     * @param y Y coordinate of template
+     * @returns Cell Type of the cell
+     */
+    private getCellTypeFromTemplate(x: number, y: number): CellType
+    {
+        return this.template.layout[y][x]
     }
 }
